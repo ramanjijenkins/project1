@@ -51,10 +51,8 @@ pipeline {
 
             export PATH="$HOME/.local/bin:$PATH"
             echo $PATH
-
-            sudo yum install epel-release -y
-            sudo yum install python-pip -y
-            sudo yum install python-pip -y
+            
+            
             pip install --user databricks-cli
             pip install -U databricks-connect
             pip install pytest
