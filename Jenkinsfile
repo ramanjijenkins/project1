@@ -52,7 +52,7 @@ pipeline {
                                 sh "ls -ltra"
                                 sh 'sonar-scanner'
                                 -Dsonar.projectKey=demokeypoc
-                                -Dsonar.sources=demokeypoc
+                                -Dsonar.sources=. \demokeypoc
                                 -Dsonar.host.url=http://52.90.92.43:9001 
                                 -Dsonar.login=79c29d0ca2d38f2b7437c72dc45dcab0c3a03136 
                                 sh "" 
