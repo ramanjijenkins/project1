@@ -51,10 +51,10 @@ pipeline {
                             withSonarQubeEnv("sonarqube-server") {
                                 sh "ls -ltra"
                                 sh 'sonar-scanner \
-                                -Dsonar.projectKey=${SVC_NAME} \
+                                -Dsonar.projectKey=demopocprojectjenkins \
                                 -Dsonar.sources=. \
-                                -Dsonar.css.node=. \
-                                -Dsonar.token=xxxxxxxxxxxxxxxxxxxxxxxxxxx'
+                                -Dsonar.host.url=http://192.168.56.103:9001 \
+                                -Dsonar.login=af0a1fb8c44a771065c235338a0c857911e8e5a2
                                 sh ""
                             }
                         }
