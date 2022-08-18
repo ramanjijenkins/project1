@@ -41,6 +41,31 @@ pipeline {
         }
 
     }
+    stage('Code Analysis') {
+            steps {
+                script {
+                    try {
+                        timeout(time: 10, unit: 'MINUTES') {
+                            env.PATH="/opt/sonar-scanner/bin:$PATH"
+                            sh "env"
+                            withSonarQubeEnv("sonarqube-server") {
+                                sh "ls -ltra"
+                                sh 'sonar-scanner \
+                                -Dsonar.projectKey=${SVC_NAME} \
+                                -Dsonar.sources=. \
+                                -Dsonar.css.node=. \
+                                -Dsonar.token=xxxxxxxxxxxxxxxxxxxxxxxxxxx'
+                                sh ""
+                            }
+                        }
+                    }
+                    catch (err) {
+                    echo err.getMessage()
+                    }
+                }
+            }
+        }
+
 
     stage('Install Requirements') {
         steps {
