@@ -58,7 +58,8 @@ pipeline {
             
             pip install --user databricks-cli
             pip install -U databricks-connect
-            pip install pytest pyspark==3.3.0
+            pip install pytest pyspark
+	    pip3 install pytest pyspark
             databricks --version
 
            '''
