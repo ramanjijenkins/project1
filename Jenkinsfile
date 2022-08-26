@@ -101,7 +101,7 @@ pipeline {
 		pip3 install nbmake pytest-xdist 
                 # Python tests for libs
                 python -m pytest --junit-xml=${TESTRESULTPATH}/TEST-libout.xml ${LIBRARYPATH}/python/dbxdemo/test*.py || true
-		python -m pytest --nbmake -n=auto ${LIBRARYPATH}/python/dbxdemo/test*.ipynb || true
+		python3 -m pytest --nbmake -n=auto ${LIBRARYPATH}/python/dbxdemo/test*.ipynb || true
                 """
           } catch(err) {
             step([$class: 'JUnitResultArchiver', testResults: '--junit-xml=${TESTRESULTPATH}/TEST-*.xml'])
