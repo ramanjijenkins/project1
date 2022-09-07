@@ -122,7 +122,9 @@ stage('build && SonarQube analysis') {
            withEnv(["PATH=/usr/bin:/usr/local/jdk-11.0.2/bin:/opt/sonarqube/sonar-scanner/bin/"]) {
            withSonarQubeEnv('sonar') {
                      sh "/opt/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=sonar-project -Dsonar.projectVersion=0.0.2 -Dsonar.sources=${projectName} -Dsonar.host.url=http://107.20.71.233:9001 -Dsonar.login=ab9d8f9c15baff5428b9bf18b0ec198a5b35c6bb -Dsonar.python.coverage.overallReportPath=coverage.xml -Dsonar.sonar.inclusions=**/*.ipynb,**/*.py -Dsonar.exclusions=**/*.ini,**./*.sh"
-		    sh ''' ${projectName}/Notebooks/coverage run test_mymath.py
+		    sh ''' 
+		    pip install coverage
+		    ${projectName}/Notebooks/coverage run test_mymath.py
 		    ${projectName}/Notebooks/coverage report -m
 		    ${projectName}/Notebooks/coverage xml
 		   '''
