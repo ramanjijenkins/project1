@@ -125,7 +125,7 @@ stage('build && SonarQube analysis') {
 		    sh ''' 
 		    pip install coverage
 		    pip install pytest-cov
-		    pytest --cov=main utests --junitxml=./XmlReport/output.xml
+		    pytest --cov=${projectName}/Notebooks/  --junitxml=./XmlReport/output.xml
                     python -m coverage xml
 		   '''
 				  
