@@ -60,9 +60,7 @@ pipeline {
             pip install -U databricks-connect
             pip install pytest pyspark
 	    pip3 install pytest pyspark
-	    pip install coverage
-	    coverage --version
-            databricks --version
+	    databricks --version
 
            '''
         }
@@ -102,6 +100,8 @@ pipeline {
                 source $WORKSPACE/miniconda/etc/profile.d/conda.sh
                 conda activate mlops2
 		pip3 install nbmake pytest-xdist 
+		pip install coverage
+	        coverage --version
                 # Python tests for libs
                 python -m pytest --junit-xml=${TESTRESULTPATH}/TEST-libout.xml ${LIBRARYPATH}/python/dbxdemo/test*.py || true
 		python3 -m pytest --nbmake -n=auto ${LIBRARYPATH}/python/dbxdemo/test*.ipynb || true
