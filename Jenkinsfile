@@ -104,8 +104,7 @@ pipeline {
                 # Python tests for libs
                 python -m pytest --junit-xml=${TESTRESULTPATH}/TEST-libout.xml ${LIBRARYPATH}/python/dbxdemo/test*.py || true
 		python3 -m pytest --nbmake -n=auto ${LIBRARYPATH}/python/dbxdemo/test*.ipynb || true
-		coverage --version
-		pwd
+		
                 """
           } catch(err) {
             step([$class: 'JUnitResultArchiver', testResults: '--junit-xml=${TESTRESULTPATH}/TEST-*.xml'])
@@ -120,12 +119,7 @@ pipeline {
 stage('build && SonarQube analysis') {
           steps {
             //def scannerhome = tool name: 'SonarQubeScanner'
-           sh '''#!/usr/bin/env bash  
-	    source $WORKSPACE/Notebooks
-	    pip install coverage
-	    coverage --version
-	    '''
-            withEnv(["PATH=/usr/bin:/usr/local/jdk-11.0.2/bin:/opt/sonarqube/sonar-scanner/bin/"]) {
+           withEnv(["PATH=/usr/bin:/usr/local/jdk-11.0.2/bin:/opt/sonarqube/sonar-scanner/bin/"]) {
            withSonarQubeEnv('sonar') {
                      sh "/opt/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=sonar-project -Dsonar.projectVersion=0.0.2 -Dsonar.sources=${projectName} -Dsonar.host.url=http://107.20.71.233:9001 -Dsonar.login=ab9d8f9c15baff5428b9bf18b0ec198a5b35c6bb -Dsonar.python.coverage.reportPaths=${projectName}/Notebooks/coverage.xml -Dsonar.sonar.inclusions=**/*.ipynb -Dsonar.exclusions=**/*.ini,**/*.py,**./*.sh"
 		   
